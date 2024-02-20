@@ -3,7 +3,6 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 
 //Use the D3 library to read in samples.json from the URL
 d3.json(url).then(function(data){
-    console.log(data);
     //Get all the samples from the data
     let samples = data.samples;
     let metadata = data.metadata;
@@ -63,8 +62,6 @@ d3.json(url).then(function(data){
         //Let the id be the key for each row data
         meta_values[row.id] = row;
     }
-    console.log(init_metaValues);
-    console.log(meta_values);
 
     function init(){
         //Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
