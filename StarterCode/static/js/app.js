@@ -6,6 +6,7 @@ d3.json(url).then(function(data){
     console.log(data);
     //Get all the samples from the data
     let samples = data.samples;
+    let metadata = data.metadata;
     //Initialize a dictionary to store the arrays of OTU IDs, sample values and otu labels for each sample ID.
     let id_values = {};
     //Initialize another dictionary for the bar chart values as only 10 values are needed for plotting.
@@ -48,6 +49,22 @@ d3.json(url).then(function(data){
         id_values[samples[i].id] = [otuIds,sampleValues,otuLabels];
         id_bar[samples[i].id] = [bar_otuIds,bar_sampleValues,bar_otuLabels];
     }   
+
+    //Initialize a dictionary to collect all the values associated with the ids.
+    let meta_values = {};
+    let init_metaValues = {};
+    //Loop through the metadata
+    for(let m=0; m < metadata.length; m++) {
+        //Get each row
+        let row = metadata[m];
+        if (m == 0){
+            init_metaValues = row;
+        }
+        //Let the id be the key for each row data
+        meta_values[row.id] = row;
+    }
+    console.log(init_metaValues);
+    console.log(meta_values);
 
     function init(){
         //Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
@@ -102,6 +119,9 @@ d3.json(url).then(function(data){
         
         // Plot the bubble chart
         Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+
+         // Call the displayMetadata function with the metadata object
+        displayMetadata(init_metaValues);
     }
 
     //Dropdown to contain all the IDs for selection
@@ -140,6 +160,28 @@ d3.json(url).then(function(data){
         }
         //Restyle the bubble plot
         Plotly.restyle("bubble", bubbleUpdate);
+
+        displayMetadata(meta_values[value]);
+    }
+
+    //Create a function to display sample metadata/demographic info.
+    function displayMetadata(metaValue) {
+        // Select the element where you want to display the metadata
+        let metadataDiv = d3.select("#sample-metadata");
+        metadataDiv.style("width", "18rem");
+
+        // Clear any existing content in the element
+        metadataDiv.html("");
+    
+        // Check if the selected metadata exists
+        if (metaValue) {
+            // Iterate over each key-value pair in the selected metadata object
+            Object.entries(metaValue).forEach(([key, value]) => {
+                // Append a new paragraph element for each key-value pair
+                metadataDiv.append("p")
+                    .text(`${key}: ${value}`);
+            });
+        }
     }
     //Run init when the index page is fired up.
     init();
