@@ -1,12 +1,12 @@
 # belly-button-challenge
-## Link to Github Pages - [https://divyasajjan1.github.io/belly-button-challenge/](https://divyasajjan1.github.io/belly-button-challenge/)
+## Link to Github Pages - [https://divyasajjan1.github.io/interactive-visualization-challenge/](https://divyasajjan1.github.io/interactive-visualization-challenge/)
 Javascript-Interactive visualisation
 
 In this assignment, I built an interactive dashboard to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 
-Entry file: [index.html](https://github.com/divyasajjan1/belly-button-challenge/edit/main/index.html)
+Entry file: [index.html](https://github.com/divyasajjan1/interactive-visualization-challenge/edit/main/index.html)
 
-JS file: [app.js](https://github.com/divyasajjan1/belly-button-challenge/edit/main/static/js/app.js)
+JS file: [app.js](https://github.com/divyasajjan1/interactive-visualization-challenge/edit/main/static/js/app.js)
 
 1. Using D3 library, I read the data from the URL to a samples.json file.
 2. I created a horizontal bar chart for the top 10 OTUs found in an individual with sample_values for the x-axis, otu_ids for the y-axis, and otu_labels as the hover text for the chart. It updates dynamically when the user selects a different OTU ID. I added a pre-fix OTU to all the otu_ids so that all the top 10 OTU IDs are displayed instead of falling in a range of numbers.
